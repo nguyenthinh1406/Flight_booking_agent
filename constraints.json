@@ -1,0 +1,15 @@
+{
+  "max_price": 5000000,
+  "allowed_airlines": [
+    "Vietnam Airlines",
+    "Vietjet",
+    "Bamboo"
+  ],
+  "max_stops": 1,
+  "must_depart_after": "06:00",
+  "require_confirm_above": 3000000,
+  "max_tool_calls": 15,
+  "max_bad_streak": 3,
+  "loop_k": 3,
+  "max_llm_calls": 12
+}
