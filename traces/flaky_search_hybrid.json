@@ -1,0 +1,262 @@
+{
+ "scenario": "flaky_search",
+ "pattern": "hybrid",
+ "outcome": "done",
+ "success": true,
+ "seconds": 15.888772249221802,
+ "usage": {
+  "tokens": 13009,
+  "llm_calls": 11
+ },
+ "events": [
+  {
+   "kind": "llm",
+   "t_start": 1791278183.1770844,
+   "t": 1791278184.8435144,
+   "ms": 1666.4299964904785,
+   "bound": false,
+   "input_last": "[HumanMessage] Hãy đặt cho Nguyen Van A một vé bay SGN -> HAN ngày 2026-10-15, chọn chuyến rẻ nhất thỏa các ràng buộc. Giữ chỗ rồi thanh toán.",
+   "text": "```json\n[\n  \"Tìm chuyến bay từ SGN đến HAN ngày 2026-10-15\",\n  \"Chọn chuyến bay rẻ nhất thỏa mãn ràng buộc\",\n  \"Giữ chỗ chuyến bay\",\n  \"Thanh toán vé\"\n]\n```",
+   "tool_calls": [],
+   "tokens": 409,
+   "start": 1791278183.1770844,
+   "rel": 0.0
+  },
+  {
+   "kind": "llm",
+   "t_start": 1791278184.8446097,
+   "t": 1791278185.7678068,
+   "ms": 923.1970310211182,
+   "bound": true,
+   "input_last": "[HumanMessage] Yêu cầu gốc: Hãy đặt cho Nguyen Van A một vé bay SGN -> HAN ngày 2026-10-15, chọn chuyến rẻ nhất thỏa các ràng buộc. Giữ chỗ rồi thanh toán.\nKế hoạch: ['Tìm chuyến bay từ SGN đến HAN ngày 2026-10-15', 'Chọn chuyến bay rẻ nhất thỏa mãn ràng buộc', 'Giữ chỗ chuyến bay', 'Thanh toán vé']\nĐã làm:\n(chưa làm gì)\n\nBây giờ CHỈ thực hiện bước 1: Tìm chuyến bay từ SGN đến HAN ngày 2026-10-15",
+   "text": "",
+   "tool_calls": [
+    [
+     "search_flights",
+     {
+      "origin": "SGN",
+      "dest": "HAN",
+      "date": "2026-10-15"
+     }
+    ]
+   ],
+   "tokens": 769,
+   "start": 1791278184.8446097,
+   "rel": 1.667525291442871
+  },
+  {
+   "kind": "tool",
+   "tool": "search_flights",
+   "args": {
+    "origin": "SGN",
+    "dest": "HAN",
+    "date": "2026-10-15"
+   },
+   "status": "ERROR",
+   "decision": "ALLOW",
+   "authz": "ALLOW",
+   "result": "TimeoutError: search service timeout",
+   "t": 1791278185.7688067,
+   "ms": 0.9999275207519531,
+   "start": 1791278185.7678068,
+   "rel": 2.5907223224639893
+  },
+  {
+   "kind": "llm",
+   "t_start": 1791278185.7688067,
+   "t": 1791278186.6202106,
+   "ms": 851.4039516448975,
+   "bound": true,
+   "input_last": "[ToolMessage] ERROR: TimeoutError: search service timeout",
+   "text": "",
+   "tool_calls": [
+    [
+     "search_flights",
+     {
+      "dest": "HAN",
+      "date": "2026-10-15",
+      "origin": "SGN"
+     }
+    ]
+   ],
+   "tokens": 828,
+   "start": 1791278185.7688067,
+   "rel": 2.591722249984741
+  },
+  {
+   "kind": "tool",
+   "tool": "search_flights",
+   "args": {
+    "dest": "HAN",
+    "date": "2026-10-15",
+    "origin": "SGN"
+   },
+   "status": "OK",
+   "decision": "ALLOW",
+   "authz": "ALLOW",
+   "result": "{\"status\": \"ok\", \"flights\": [{\"id\": \"VN101\", \"airline\": \"Vietnam Airlines\", \"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\", \"depart\": \"06:30\", \"price\": 2400000, \"stops\": 0}, {\"id\": \"VJ202\", \"airline\": \"Vietjet\", \"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\", \"depart\": \"05:10\", \"price\": 1300000, \"stops\": 0}, {\"id\": \"QH303\", \"airline\": \"Bamboo\", \"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\", \"depart\": \"09:00\", \"price\": 1900000, \"stops\": 0}, {\"id\": \"VN404\", \"airline\": \"Vietnam Airlines\", \"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\", \"depart\": \"18:00\", \"price\": 6200000, \"stops\": 0}, {\"id\": \"XX707\", \"airline\": \"Vietjet\", \"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\", \"depart\": \"10:00\", \"price\": 1000000, \"stops\": 2}]}",
+   "t": 1791278186.620809,
+   "ms": 0.5984306335449219,
+   "start": 1791278186.6202106,
+   "rel": 3.4431262016296387
+  },
+  {
+   "kind": "llm",
+   "t_start": 1791278186.620809,
+   "t": 1791278188.6872733,
+   "ms": 2066.4641857147217,
+   "bound": true,
+   "input_last": "[ToolMessage] {\"status\": \"ok\", \"flights\": [{\"id\": \"VN101\", \"airline\": \"Vietnam Airlines\", \"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\", \"depart\": \"06:30\", \"price\": 2400000, \"stops\": 0}, {\"id\": \"VJ202\", \"airline\": \"Vietjet\", \"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\", \"depart\": \"05:10\", \"price\": 1300000, \"stops\": 0}, {\"id\": \"QH303\", \"airline\": \"Bamboo\", \"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\", \"depart\": \"09:00\", \"price\": 1900000, \"stops\": 0}, {\"id\": \"VN404\", \"airline\": \"Vietnam Airlines\", \"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\", \"depart\": \"18:00\", \"pr",
+   "text": "Đã tìm kiếm chuyến bay từ SGN đến HAN ngày 2026-10-15 thành công. Các chuyến bay khả dụng:\n1. VN101 (Vietnam Airlines): 06:30, 0 điểm dừng, 2,400,000 VND\n2. VJ202 (Vietjet): 05:10, 0 điểm dừng, 1,300,000 VND (Khởi hành trước 06:00, vi phạm ràng buộc `must_depart_after: 06:00`)\n3. QH303 (Bamboo): 09:00, 0 điểm dừng, 1,900,000 VND\n4. VN404 (Vietnam Airlines): 18:00, 0 điểm dừng, 6,200,000 VND (Vượt quá `max_price: 5,000,000`)\n5. XX707 (Vietjet): 10:00, 2 điểm dừng, 1,000,000 VND (Vượt quá `max_stops: 1`)\n\nChuyến bay rẻ nhất thỏa mãn mọi ràng buộc (`max_price <= 5,000,000`, hãng hợp lệ, `max_stops <= 1`, `must_depart_after >= 06:00`) là **QH303** của Bamboo với giá **1,900,000 VND**.",
+   "tool_calls": [],
+   "tokens": 1524,
+   "start": 1791278186.620809,
+   "rel": 3.4437246322631836
+  },
+  {
+   "kind": "llm",
+   "t_start": 1791278188.688728,
+   "t": 1791278190.0109203,
+   "ms": 1322.1921920776367,
+   "bound": false,
+   "input_last": "[HumanMessage] Hãy đặt cho Nguyen Van A một vé bay SGN -> HAN ngày 2026-10-15, chọn chuyến rẻ nhất thỏa các ràng buộc. Giữ chỗ rồi thanh toán.\n\nKế hoạch trước chưa thành công. Đã thực hiện:\n- search_flights({\"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\"}) -> ERROR: TimeoutError: search service timeout\n- search_flights({\"dest\": \"HAN\", \"date\": \"2026-10-15\", \"origin\": \"SGN\"}) -> OK: {\"status\": \"ok\", \"flights\": [{\"id\": \"VN101\", \"airline\": \"Vietnam Airlines\", \"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\", \"depart\": \"06:30\", \"price\": 2400000, \"stops\": 0}, {\"id\": \"VJ202\", \"airline\": \"Vi",
+   "text": "[\n  \"Lọc các chuyến bay thỏa mãn ràng buộc về hãng, giá, số điểm dừng và giờ khởi hành\",\n  \"Chọn chuyến bay rẻ nhất từ danh sách đã lọc\",\n  \"Giữ chỗ cho chuyến bay đã chọn\",\n  \"Thanh toán vé\"\n]",
+   "tool_calls": [],
+   "tokens": 880,
+   "start": 1791278188.688728,
+   "rel": 5.511643648147583
+  },
+  {
+   "kind": "llm",
+   "t_start": 1791278190.0122087,
+   "t": 1791278192.3721123,
+   "ms": 2359.903573989868,
+   "bound": true,
+   "input_last": "[HumanMessage] Yêu cầu gốc: Hãy đặt cho Nguyen Van A một vé bay SGN -> HAN ngày 2026-10-15, chọn chuyến rẻ nhất thỏa các ràng buộc. Giữ chỗ rồi thanh toán.\nKế hoạch: ['Lọc các chuyến bay thỏa mãn ràng buộc về hãng, giá, số điểm dừng và giờ khởi hành', 'Chọn chuyến bay rẻ nhất từ danh sách đã lọc', 'Giữ chỗ cho chuyến bay đã chọn', 'Thanh toán vé']\nĐã làm:\n- search_flights({\"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\"}) -> ERROR: TimeoutError: search service timeout\n- search_flights({\"dest\": \"HAN\", \"date\": \"2026-10-15\", \"origin\": \"SGN\"}) -> OK: {\"status\": \"ok\", \"flights\": [{\"id\": \"VN101",
+   "text": "Dựa trên các ràng buộc:\n- **`max_price`**: 5.000.000 VND\n- **`allowed_airlines`**: [\"Vietnam Airlines\", \"Vietjet\", \"Bamboo\"] (Tất cả hãng trong danh sách đều hợp lệ)\n- **`max_stops`**: 1 (Số điểm dừng tối đa là 1)\n- **`must_depart_after`**: \"06:00\" (Giờ khởi hành phải sau 06:00)\n\nXét các chuyến bay từ kết quả tìm kiếm:\n1. **VN101** (Vietnam Airlines): \n   - Khởi hành: 06:30 (> 06:00: **Thỏa mãn**)\n   - Giá: 2.400.000 VND (<= 5.000.000: **Thỏa mãn**)\n   - Số điểm dừng: 0 (<= 1: **Thỏa mãn**)\n   -> **Hợp lệ**\n\n2. **VJ202** (Vietjet): \n   - Khởi hành: 05:10 (không thỏa mãn vì trước 06:00)\n   -> **Không hợp lệ**\n\n3. **QH303** (Bamboo): \n   - Khởi hành: 09:00 (> 06:00: **Thỏa mãn**)\n   - Giá: 1.900.000 VND (<= 5.000.000: **Thỏa mãn**)\n   - Số điểm dừng: 0 (<= 1: **Thỏa mãn**)\n   -> **Hợp lệ**\n\n4. **VN404** (Vietnam Airlines): \n   - Giá: 6.200.000 VND (> 5.000.000)\n   -> **Không hợp lệ**\n\n5. **XX707** (Vietjet): \n   - Số điểm dừng: 2 (> 1)\n   -> **Không hợp lệ**\n\n**Danh sách chuyến bay thỏa mãn sau khi lọc:**\n- **QH303** (Bamboo) - Khởi hành: 09:00 - Giá: 1.900.000 VND - Điểm dừng: 0\n- **VN101** (Vietnam Airlines) - Khởi hành: 06:30 - Giá: 2.400.000 VND - Điểm dừng: 0",
+   "tool_calls": [],
+   "tokens": 1732,
+   "start": 1791278190.0122087,
+   "rel": 6.835124254226685
+  },
+  {
+   "kind": "llm",
+   "t_start": 1791278192.3745625,
+   "t": 1791278194.5333183,
+   "ms": 2158.7557792663574,
+   "bound": true,
+   "input_last": "[HumanMessage] Yêu cầu gốc: Hãy đặt cho Nguyen Van A một vé bay SGN -> HAN ngày 2026-10-15, chọn chuyến rẻ nhất thỏa các ràng buộc. Giữ chỗ rồi thanh toán.\nKế hoạch: ['Lọc các chuyến bay thỏa mãn ràng buộc về hãng, giá, số điểm dừng và giờ khởi hành', 'Chọn chuyến bay rẻ nhất từ danh sách đã lọc', 'Giữ chỗ cho chuyến bay đã chọn', 'Thanh toán vé']\nĐã làm:\n- search_flights({\"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\"}) -> ERROR: TimeoutError: search service timeout\n- search_flights({\"dest\": \"HAN\", \"date\": \"2026-10-15\", \"origin\": \"SGN\"}) -> OK: {\"status\": \"ok\", \"flights\": [{\"id\": \"VN101",
+   "text": "Dựa trên danh sách các chuyến bay từ SGN đi HAN ngày 2026-10-15 và các ràng buộc (giá tối đa 5.000.000 VND, hãng thuộc Vietnam Airlines/Vietjet/Bamboo, tối đa 1 điểm dừng, giờ khởi hành từ 06:00):\n\n- **VN101** (Vietnam Airlines): 06:30, 2.400.000 VND, 0 điểm dừng -> Thỏa mãn mọi ràng buộc.\n- **VJ202** (Vietjet): 05:10 -> Vi phạm ràng buộc khởi hành sau 06:00.\n- **QH303** (Bamboo): 09:00, 1.900.000 VND, 0 điểm dừng -> Thỏa mãn mọi ràng buộc, rẻ hơn VN101.\n- **VN404** (Vietnam Airlines): 6.200.000 VND -> Vượt quá giá tối đa 5.000.000 VND.\n- **XX707** (Vietjet): 2 điểm dừng -> Vi phạm ràng buộc tối đa 1 điểm dừng.\n\nChuyến bay rẻ nhất thỏa mãn tất cả các ràng buộc là **QH303** (Bamboo, giá 1.900.000 VND, khởi hành lúc 09:00). \n\nTiếp theo sẽ tiến hành giữ chỗ cho chuyến bay QH303.",
+   "tool_calls": [],
+   "tokens": 1498,
+   "start": 1791278192.3745625,
+   "rel": 9.19747805595398
+  },
+  {
+   "kind": "llm",
+   "t_start": 1791278194.535318,
+   "t": 1791278195.5154343,
+   "ms": 980.1163673400879,
+   "bound": true,
+   "input_last": "[HumanMessage] Yêu cầu gốc: Hãy đặt cho Nguyen Van A một vé bay SGN -> HAN ngày 2026-10-15, chọn chuyến rẻ nhất thỏa các ràng buộc. Giữ chỗ rồi thanh toán.\nKế hoạch: ['Lọc các chuyến bay thỏa mãn ràng buộc về hãng, giá, số điểm dừng và giờ khởi hành', 'Chọn chuyến bay rẻ nhất từ danh sách đã lọc', 'Giữ chỗ cho chuyến bay đã chọn', 'Thanh toán vé']\nĐã làm:\n- search_flights({\"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\"}) -> ERROR: TimeoutError: search service timeout\n- search_flights({\"dest\": \"HAN\", \"date\": \"2026-10-15\", \"origin\": \"SGN\"}) -> OK: {\"status\": \"ok\", \"flights\": [{\"id\": \"VN101",
+   "text": "",
+   "tool_calls": [
+    [
+     "hold_seat",
+     {
+      "passenger": "Nguyen Van A",
+      "flight_id": "QH303"
+     }
+    ]
+   ],
+   "tokens": 1192,
+   "start": 1791278194.535318,
+   "rel": 11.358233451843262
+  },
+  {
+   "kind": "tool",
+   "tool": "hold_seat",
+   "args": {
+    "passenger": "Nguyen Van A",
+    "flight_id": "QH303"
+   },
+   "status": "OK",
+   "decision": "ALLOW",
+   "authz": "ALLOW",
+   "result": "{\"status\": \"ok\", \"booking_id\": \"BK001\", \"passenger\": \"Nguyen Van A\", \"state\": \"HELD\", \"paid\": false, \"id\": \"QH303\", \"airline\": \"Bamboo\", \"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\", \"depart\": \"09:00\", \"price\": 1900000, \"stops\": 0}",
+   "t": 1791278195.5165098,
+   "ms": 1.0755062103271484,
+   "start": 1791278195.5154343,
+   "rel": 12.33834981918335
+  },
+  {
+   "kind": "llm",
+   "t_start": 1791278195.5165098,
+   "t": 1791278196.9411197,
+   "ms": 1424.609899520874,
+   "bound": true,
+   "input_last": "[ToolMessage] {\"status\": \"ok\", \"booking_id\": \"BK001\", \"passenger\": \"Nguyen Van A\", \"state\": \"HELD\", \"paid\": false, \"id\": \"QH303\", \"airline\": \"Bamboo\", \"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\", \"depart\": \"09:00\", \"price\": 1900000, \"stops\": 0}",
+   "text": "Đã thực hiện giữ chỗ thành công cho hành khách Nguyen Van A trên chuyến bay QH303 (Bamboo, SGN -> HAN, ngày 2026-10-15, giờ khởi hành 09:00, giá 1.900.000 VNĐ) với mã đặt chỗ `BK001`.",
+   "tool_calls": [],
+   "tokens": 1379,
+   "start": 1791278195.5165098,
+   "rel": 12.339425325393677
+  },
+  {
+   "kind": "llm",
+   "t_start": 1791278196.9421434,
+   "t": 1791278197.8193507,
+   "ms": 877.2072792053223,
+   "bound": true,
+   "input_last": "[HumanMessage] Yêu cầu gốc: Hãy đặt cho Nguyen Van A một vé bay SGN -> HAN ngày 2026-10-15, chọn chuyến rẻ nhất thỏa các ràng buộc. Giữ chỗ rồi thanh toán.\nKế hoạch: ['Lọc các chuyến bay thỏa mãn ràng buộc về hãng, giá, số điểm dừng và giờ khởi hành', 'Chọn chuyến bay rẻ nhất từ danh sách đã lọc', 'Giữ chỗ cho chuyến bay đã chọn', 'Thanh toán vé']\nĐã làm:\n- search_flights({\"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\"}) -> ERROR: TimeoutError: search service timeout\n- search_flights({\"dest\": \"HAN\", \"date\": \"2026-10-15\", \"origin\": \"SGN\"}) -> OK: {\"status\": \"ok\", \"flights\": [{\"id\": \"VN101",
+   "text": "",
+   "tool_calls": [
+    [
+     "pay",
+     {
+      "booking_id": "BK001"
+     }
+    ]
+   ],
+   "tokens": 1312,
+   "start": 1791278196.9421434,
+   "rel": 13.765058994293213
+  },
+  {
+   "kind": "tool",
+   "tool": "pay",
+   "args": {
+    "booking_id": "BK001"
+   },
+   "status": "OK",
+   "decision": "ALLOW",
+   "authz": "ALLOW",
+   "result": "{\"status\": \"ok\", \"booking_id\": \"BK001\", \"passenger\": \"Nguyen Van A\", \"state\": \"PAID\", \"paid\": true, \"id\": \"QH303\", \"airline\": \"Bamboo\", \"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\", \"depart\": \"09:00\", \"price\": 1900000, \"stops\": 0}",
+   "t": 1791278197.8204522,
+   "ms": 1.1014938354492188,
+   "start": 1791278197.8193507,
+   "rel": 14.642266273498535
+  },
+  {
+   "kind": "llm",
+   "t_start": 1791278197.8204522,
+   "t": 1791278199.0621924,
+   "ms": 1241.7402267456055,
+   "bound": true,
+   "input_last": "[ToolMessage] {\"status\": \"ok\", \"booking_id\": \"BK001\", \"passenger\": \"Nguyen Van A\", \"state\": \"PAID\", \"paid\": true, \"id\": \"QH303\", \"airline\": \"Bamboo\", \"origin\": \"SGN\", \"dest\": \"HAN\", \"date\": \"2026-10-15\", \"depart\": \"09:00\", \"price\": 1900000, \"stops\": 0}",
+   "text": "Đã thanh toán thành công vé chuyến bay QH303 của hãng Bamboo (SGN -> HAN, ngày 2026-10-15) cho hành khách Nguyen Van A với giá 1.900.000 VNĐ. Mã đặt chỗ: BK001.",
+   "tool_calls": [],
+   "tokens": 1486,
+   "start": 1791278197.8204522,
+   "rel": 14.643367767333984
+  },
+  {
+   "kind": "check",
+   "t": 1791278199.0632973,
+   "ok": true,
+   "errors": [],
+   "start": 1791278199.0632973,
+   "rel": 15.886212825775146
+  }
+ ]
+}
