@@ -41,4 +41,3 @@ yarn-error.log*
 *.env
 # Ignore virtual environments and trace folders
 venv/
-traces/
